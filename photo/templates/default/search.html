@@ -1,0 +1,80 @@
+{template "header.html"}
+<link rel="stylesheet" type="text/css" href="{HOME_THEME_PATH}css/list.css" />
+<div class="bk10"></div>
+<div class="main clear">
+    <div class="box cat-data">
+        <dl class="clear" style="border-top:none">
+            <dt><strong>栏目分类：</strong></dt>
+            <dd class="AttrBox">
+                <a {if !$catid}class="curr"{/if} href="{dr_search_url($params, 'catid', NULL)}">不限</a>
+                <!--调用栏目分类，这种用法只能用于模块列表与搜索页面-->
+                {loop $related $t}
+                <a {if $t.id==$catid}class="curr"{/if} href="{dr_search_url($params, 'catid', $t.id)}">{$t.name}</a>
+                {/loop}
+            </dd>
+        </dl>
+        <dl class="clear">
+            <dt style="margin-top:5px;"><strong>关键字搜索：</strong></dt>
+            <dd class="AttrBox">
+                <input onkeypress="if(event.keyCode==13) {searchByClass();return false;}" type='text' name='keyword' value='{$keyword}' id='dr_search_keyword' class="examtext02" />
+                <input onclick="searchByClass()" type='button' value='搜索' class="exambtn02"/>
+                <script type="text/javascript">
+                    function searchByClass(){
+                        var url="{dr_search_url($params, 'keyword', 'omooocom')}";
+                        var value=$("#dr_search_keyword").val();
+                        if (value) {
+                            location.href=url.replace('omooocom', value);
+                        } else {
+                            dr_tips("输入关键字");
+                        }
+                    }
+                </script>
+            </dd>
+        </dl>
+    </div>
+    <div class="col-left">
+        <div class="category-main box generic info-content">
+            <div class="title">
+                <strong>搜索结果</strong>
+            </div>
+            {if $contentid}
+            <!--固定格式INin参数调用搜索数据，field同样可以设置显示字段，page=1表示分页显示开关，pagesize表示分页数量，ruleurl分页url规则-->
+            {list action=module INid=$contentid order=$get.order page=1 pagesize=10 urlrule=$urlrule}
+            <ul class="info-item clear">
+                <li class="pic">
+                    <div class="img-wrap"><a href="{$t.url}"><img src="{dr_thumb($t.thumb, 110, 90)}" width="110" height="90" /></a></div>
+                </li>
+                <li class="info">
+                    <h2><a href="{$t.url}">{dr_keyword_highlight($t.title, $keyword)}</a></h2>
+                    <p style="line-height:15px">{dr_keyword_highlight($t.description, $keyword)}</p>
+                    <p>{$t.updatetime}</p>
+                </li>
+            </ul>
+            {/list}
+            {else}
+            <div class="norecord">对不起，没有找到任何记录！</div>
+            {/if}
+            <div id="pages" class="text-c">{$pages}</div>
+        </div>
+    </div>
+    <div class="col-auto">
+        <div class="box">
+            <h5 class="title-2">最新排行榜</h5>
+            <ul class="content digg">
+                {list action=module catid=$catid order=updatetime num=10}
+                <li><a href="{$t.url}">{$t.title}</a></li>
+                {/list}
+            </ul>
+        </div>
+        <div class="bk10"></div>
+        <div class="box">
+            <h5 class="title-2">热门排行榜</h5>
+            <ul class="content digg">
+                {list  action=module catid=$catid order=hits num=10}
+                <li><a href="{$t.url}">{$t.title}</a></li>
+                {/list} {$error}
+            </ul>
+        </div>
+    </div>
+</div>
+{template "footer.html","/"}

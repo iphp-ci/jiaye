@@ -1,0 +1,36 @@
+<!-- <div class="wman100 zzwmin banner-box">
+      <div class="seven_container">
+            <div id="seven_viewport">
+                <div class="seven_slider">
+                {list action=navigator type=1}
+                 {if $t.thumb}
+                    <div class="seven_slide"><a href="{$t.url}" class="seven_slide_title" {if $t.target}target="_blank"{/if}></a><a href="{$t.url}" {if $t.target}target="_blank"{/if}><img src="{dr_thumb($t.thumb)}" /></a></div>
+                    {else}
+                    <div class="seven_slide"><a href="{$t.url}" class="seven_slide_title" {if $t.target}target="_blank"{/if}></a><a href="{$t.url}" {if $t.target}target="_blank"{/if}><img src="{HOME_THEME_PATH}img/ban1.jpg" /></a></div>
+                    {/if}
+                  {/list}
+
+                </div>
+            </div>
+            <a id="left_btn" class="seven_nav">Previous Slide</a>
+            <a id="right_btn" class="seven_nav right_btn">Next Slide</a>
+    </div>
+</div> -->
+
+<div class="fullSlide">
+  <div class="bd">
+    <ul>
+     {list action=navigator type=1}
+                 {if $t.thumb}
+      <li _src="url({dr_thumb($t.thumb)})" style="background: center 0 no-repeat;"><a  href="{$t.url}" {if $t.target}target="_blank"{/if}></a></li>
+      {else}
+       <li _src="url({HOME_THEME_PATH}img/ban1.jpg})" style="background: center 0 no-repeat;"><a  href="{$t.url}" {if $t.target}target="_blank"{/if}></a></li>
+                {/if}
+     {/list}
+    </ul>
+  </div>
+  <div class="hd">
+    <ul>
+    </ul>
+  </div>
+  <span class="prev"></span> <span class="next"></span> </div>

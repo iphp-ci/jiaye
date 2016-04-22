@@ -1,0 +1,17 @@
+<div class="fullSlide">
+  <div class="bd">
+    <ul>
+     {list action=navigator type=1}
+                 {if $t.thumb}
+      <li _src="url({dr_thumb($t.thumb)})" style="background: center 0 no-repeat;"><a  href="{$t.url}" {if $t.target}target="_blank"{/if}></a></li>
+      {else}
+       <li _src="url({HOME_THEME_PATH}img/ban1.jpg})" style="background: center 0 no-repeat;"><a  href="{$t.url}" {if $t.target}target="_blank"{/if}></a></li>
+                {/if}
+     {/list}
+    </ul>
+  </div>
+  <div class="hd">
+    <ul>
+    </ul>
+  </div>
+  <span class="prev"></span> <span class="next"></span> </div>

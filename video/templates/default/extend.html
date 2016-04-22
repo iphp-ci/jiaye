@@ -1,0 +1,44 @@
+{template "header.html"}
+<script language="javascript">
+    // 这是加入收藏夹的ajax请求，我就随意写了一下提示信息，至于美化啊什么交给你们了
+    function dr_favorite() {
+        $.get("{MODULE_URL}index.php?c=api&m=favorite&id={$id}&cid={$cid}", function(data){
+            if (data == 1) {
+                dr_tips("没有登录，不能收藏");
+            } else if (data == 2) {
+                dr_tips("文档不存在，无法收藏");
+            } else if (data == 3) {
+                dr_tips("更新收藏成功", 3, 1);
+            } else if (data == 4) {
+                dr_tips("收藏成功", 3, 1);
+            }
+        });
+    }
+</script>
+<div class="Dg">您当前位置：<a href="{SITE_URL}">首页</a>  > <a href="{MODULE_URL}">{MODULE_NAME}</a>  > {dr_catpos($catid, ' > ')} > <a href="{$curl}">{$title}</a> > {$name}</div>
+<div class="main photo-channel" style="margin-top:0">
+    <div id="Article">
+    	<h1>【{$name}】{$title}<br><span>{$inputtime}&nbsp;&nbsp;&nbsp;作者：{$author}&nbsp;&nbsp;&nbsp;人气：{dr_show_hits($id)}</span></h1>
+		<div class="tool">
+       		<div class="Article-Tool"><span id="favorite"><a href="javascript:;" onclick="dr_favorite();" class="t6">收藏</a></span></div>
+		</div>
+    	<div class="big-pic" style="padding:0">
+			{dr_player('video', $video, 917, 550, $next_page.url, $title.$name, $url, $body ? $body : $description, $preview ? $preview : $thumb)}
+    	</div>
+        <div class="chapter_list">
+             <ul class="movielist movielist_115x70">
+                {list action=extend field=name,url,preview,id cid=$cid order=id_asc}
+                <li>
+                    <a class="pic" target="_blank" href="{$t.url}"><img src="{dr_thumb($t.preview)}" ></a>
+                    <h3><a target="_blank" href="{$t.url}" {if $id==$t.id} style="font-weight:bold; color:#F00"{/if}>{$t.name}</a></h3>
+                </li>
+                {/list}
+            </ul>
+            <div class="clear"></div>
+        </div>
+  		<div class="bk10"></div>
+		<div class="content">{$content}</div>
+  	</div>
+  	<div class="bk10"></div>
+</div>
+{template "footer.html","/"}

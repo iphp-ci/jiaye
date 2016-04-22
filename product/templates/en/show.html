@@ -1,0 +1,136 @@
+{template "header.html"}
+  
+  <body>
+  <!-- top header -->
+    {template "top.html"}
+    <!-- top header end-->
+    <!-- nav -->
+   {template "nav.html"} 
+    <!-- nav end-->
+    <!-- page bannr -->
+    {template "pagebanner.html"}
+    <!-- page bannr end-->
+    <!-- page wrap -->
+    <div class="zzw mauto pagewrapbox">
+    <!-- left -->
+      <div class="fl zpageleft">
+        <h1 class="ztitle">position：Products</h1>
+        <ul class="zpageleftUl">
+         {list action=category pid=0  return=n1}
+          <li>
+            <a href="{$n1.url}" {if $catid==$n1.id} class="on" {/if}>{$n1.name}</a>
+
+          {if $n1.child}
+              <div class="zpage_child">
+                <ul class="zpage_child_ul">
+                {list action=category pid=$n1.id  return=n2}
+                  <li><a href="{$n2.url}">{$n2.name}</a></li>
+                  
+                  {/list}
+                </ul>
+              </div>
+            {/if}
+          </li> 
+          {/list}
+        </ul>
+      </div>
+    <!-- left end-->
+    <!-- right -->
+    <div class="fr zpageright">
+      <div class="zMianBaobox">
+        <span class="fr">{if $title}{$title}{else}{$name}{/if}</span>
+        Your present position：Products &gt;{dr_catpos($catid, ' > ')}
+         <i class="zquan">〇</i>
+      </div>
+      <!-- count -->
+      <div class="zpageCountB">
+        <!-- product show -->
+        <div class="product-show-box">
+          <p>
+          {if $thumb}
+          <img src="{dr_thumb($thumb)}" alt="" class="zthumb" />
+          {else}
+           <img src="{HOME_THEME_PATH}images/product/mo.jpg" alt="" class="zthumb" />no....
+           {/if}
+          </p>
+          <div class="proshowbox">
+             <div class="proshowTitle" id="proshowTitleI">
+               <a href="javascript:;" class="on">Overview</a>
+               <a href="javascript:;" >Hardware</a>
+               <a href="javascript:;" >Software</a>
+               <a href="javascript:;" >Applications</a>
+               <a href="javascript:;" >Download</a>
+               <a href="javascript:;" >Realated Products</a>
+             </div>
+             <div class="proshowwrap" id="proshowwrapI">
+              <!-- 概述 -->
+               <div class="proshowCone">
+                 <p>{$content}
+
+                 </p>
+               </div>
+              <!-- 概述 end-->
+              <!-- 硬件参数 -->
+              <div class="proshowCone">
+                 <p>{$hardware}
+
+                 </p>
+               </div>
+              <!-- 硬件参数 end-->
+              <!-- 软件资源 -->
+              <div class="proshowCone">
+                 <p>
+                    {$software}
+                 </p>
+               </div>
+              <!-- 软件资源 end-->
+              <!-- 行业应用 -->
+              <div class="proshowCone">
+                 <p>
+                    {$industry}
+                 </p>
+               </div>
+              <!-- 行业应用 end-->
+              <!-- 资料下载 -->
+              <div class="proshowCone">
+                 <p class="p1">
+                 Download
+                 </p>
+                 <p class="p2">
+                 {$title}
+                   <a href="{dr_down_file($docdown)}" title="{$title}资料下载"><img src="{HOME_THEME_PATH}images/down/ico-pdf.gif" alt="" /></a>
+                 </p>
+               </div>
+              <!-- 资料下载 end-->
+              <!-- 相关产品 -->
+              <div class="proshowCone">
+                 <p class="p1">Realated Products</p>
+                  <p class="p2">
+                    <!-- <ul class="pxiangguanUl">
+                    {list action=related field=title,url,thumb tag=$tag num=5}
+                    
+                      <li>
+                        <a href="{$t.url}" title="{$t.title}">
+                          
+                          <span>{$t.title}</span>
+                        </a>
+                      </li>
+                      {/list}
+                    </ul> -->
+                    {$xiangguan}
+                  </p>
+                  
+               </div>
+              <!-- 相关产品 end-->
+             </div>
+          </div>
+        </div>
+        <!-- product show end-->
+        </div>
+      <!-- count end-->
+    </div>
+    <!-- right end-->
+    </div>
+    <!-- page wrap end-->
+    <!-- footer -->
+   {template "footer.html"}

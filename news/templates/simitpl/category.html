@@ -1,0 +1,90 @@
+{template "header.html"}
+<body>
+    <!-- header -->
+    <div class="zzw mauto zbox">
+    {template "top.html"}
+    <!-- header end-->  
+    <!-- banner -->
+    {template "banner.html"}
+    <!-- banner end-->
+    <!-- count midden  -->
+    <div class="zzw2 mauto zcountbox">
+      <!-- left -->
+      <div class="fl zsidelf">
+        <!-- 1 -->
+        <div class="zsidediv">
+          <h2 class="ztitle"><i class="hongxian"></i><span>{CATEGORY.$catid.name}</span></h2>
+          <div class="zsidecount">
+            <ul class="zsidecountul">
+
+
+          {list action=category pid=$cat.pid return=c}
+          {if $key==0}
+           <li {if $c.id==$catid} class="on za1" {/if}><i></i><a href="{$c.url}">{$c.name}</a></li>
+          {else}
+           <li><i></i><a href="{$c.url}">{$c.name}</a></li>
+           {/if}
+          {/list}
+
+           
+            </ul>
+          </div>
+        </div>
+        <!-- 1 end-->
+        <!-- 2 -->
+        <div class="zsidediv">
+          <h2 class="ztitle"><i class="hongxian"></i><span>新闻搜索
+          </span></h2>
+          <div class="zsidecount">
+            <form method="get" target="_blank" action="{SITE_URL}index.php" class="newform">
+                <select name="" id="" class="newselect">
+                   {list action=category pid=$cat.pid return=c}
+                    <option value="{$c.name}">{$c.name}</option>
+                    {/list}
+                </select>
+                <input name="module" type="hidden" value="{APP_DIR}">
+                <input type="text" class="searchtext" name="keyword" maxlength="50"/><br/>
+                <input type="submit" class="seabtn"/>
+            </form>
+          
+          </div>
+        </div>
+        <!-- 2 end-->
+        <!-- imgin -->
+       <!--  <div class="indexleftimg">
+          <img src="./images/1268457867.gif" alt="" />
+        </div> -->
+        <!-- imgin end-->
+      </div>
+      <!-- left end-->
+      <!-- right -->
+      <div class="fl zcountrt">
+        <!-- page -->
+        <div class="pagemian">
+            <h2><i class="hongxian"></i>
+            您现在的位置：<a href="{SITE_URL}">{SITE_NAME}</a> &gt; {dr_catpos($catid,'&gt;')}</h2>
+            <div class="d1"></div>
+            <div class="d1"></div>
+            <div class="d1"></div>
+        </div>
+       <div class="newlistd">
+           <ul class="newlistul">
+           {list action=module catid=$catid field=title,url,description,thumb order=updatetime page=1}
+               <li><span></span><a href="{$t.url}" title="{$t.title}">{dr_strcut($t.title,100)}</a></li>
+             
+            {/list}
+           </ul>
+       </div>
+        <!-- page end-->
+        <!-- pading -->
+        <div class="zpagding">
+            {$pages}
+        </div>
+        <!-- pading end-->
+      </div>
+      <!-- right end-->
+    </div>
+    <!-- count midden  end-->
+ 
+    <!-- footer -->
+    {template "footer.html"}

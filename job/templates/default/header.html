@@ -1,0 +1,16 @@
+{template "header.html", "/"}
+<script language="javascript">
+// 选中导航菜单
+$("#dr_nav_1").addClass("index");
+</script>
+<link href="{HOME_THEME_PATH}news/images/news.css" rel="stylesheet" />
+<div class="top_nav">
+    <ul>
+        <!--循环栏目作为导航栏目，pid=0表示顶级栏目-->
+        {list action=category pid=0}
+        <!--下面那句if表示当前栏目时就加粗高亮显示-->
+        <li {if in_array($catid, $t.catids)} style="font-weight:bold;"{/if}><a href="{$t.url}">{$t.name}</a></li>
+        {/list}{$error}
+        <li><a href="{MODULE_URL}index.php?c=search">模块搜索</a></li>
+    </ul>
+</div>

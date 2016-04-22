@@ -1,0 +1,65 @@
+{template "header.html"}
+  
+  <body>
+  <!-- top header -->
+    {template "top.html"}
+    <!-- top header end-->
+    <!-- nav -->
+   {template "nav.html"} 
+    <!-- nav end-->
+    <!-- page bannr -->
+   {template "pagebanner.html"}
+    <!-- page bannr end-->
+    <!-- page wrap -->
+    <div class="zzw mauto pagewrapbox">
+    <!-- left -->
+      <div class="fl zpageleft">
+        <h1 class="ztitle">{$parent.name}</h1>
+        <ul class="zpageleftUl">
+          {loop $related $t}
+          <li><a href="{$t.url}" {if $pid==$t.catid} class="on" {/if}>{$t.name}</a></li> 
+          {/loop}     
+        </ul>
+      </div>
+    <!-- left end-->
+    <!-- right -->
+    <div class="fr zpageright">
+      <div class="zMianBaobox">
+        <span class="fr">{if $title}{$title}{else}{$name}{/if}</span>
+         Your present position：{dr_catpos($catid, ' - ')}
+         <i class="zquan">〇</i>
+      </div>
+      <!-- count -->
+      <div class="zpageCountB">
+           <div class="videoListbox">
+          <ul class="videoListUl">
+            {list action=module catid=$catid fiele=title,url,description,thumb order=updatetime page=1}
+            <li> 
+              <div class="zthumb">
+                <a href="{$t.url}">
+                {if $t.thumb}
+                  <img src="{dr_thumb($t.thumb,245,177)}" alt="{$t.title}" />
+                {else}
+                   <img src="{HOME_THEME_PATH}images/video/thumb.jpg" alt="" />
+                {/if}
+                </a>
+              </div>
+              <h4 class="ztitle">{dr_strcut($t.title,60)}</h4>
+            </li>
+            {/list}
+          </ul>
+        </div>
+        <div class="clear"></div>
+         <!-- pading -->
+        <div class="zpading" id="zpadingI">
+         {$pages}
+        </div>
+        <!-- pading end-->
+      </div>
+      <!-- count end-->
+    </div>
+    <!-- right end-->
+    </div>
+    <!-- page wrap end-->
+    <!-- footer -->
+   {template "footer.html"}

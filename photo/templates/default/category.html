@@ -1,0 +1,30 @@
+{template "header.html"}
+<div class="Dg">您当前位置：<a href="{SITE_URL}">首页</a>  > <a href="{MODULE_URL}">{MODULE_NAME}</a>  > {dr_catpos($catid, ' > ')}<!--面包屑--></div>
+<div class="main photo-channel" style="margin-top:0">
+    <!--循环输出顶级栏目下面的子栏目及其内容，运用到了双list循环标签因此需要定义返回值return=c（都懂得）-->
+	{list action=category pid=$catid return=c}
+    <div class="bk10"></div>
+	<div class="photo-cat">
+        <div class="content">
+        	<h5>
+            <a href="{$c.url}"><strong>{$c.name}</strong></a>
+			<span class="blue"><a href="{$c.url}" class="more">更多&gt;&gt;</a></span>
+			</h5>
+            <ul class="photo-list picbig">
+            	<!--循环输出当前栏目下面的数据，我们按时间排序-->
+                {list action=module catid=$c.id field=thumb,title,url,description order=updatetime num=10}
+				<li>
+                    <div class="img-wrap">
+                        <a href="{$t.url}"><img src="{dr_thumb($t.thumb, 150, 112)}" style="display: inline; width: 150px; height: 112px;"></a>
+                    </div>
+                    <a href="{$t.url}">{dr_strcut($t.title, 20)}</a>
+				</li>
+                {/list}{$error}
+			</ul>
+        </div>
+    </div>
+	{/list}
+	<div class="bk10"></div>
+</div>
+
+{template "footer.html","/"}

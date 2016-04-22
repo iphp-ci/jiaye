@@ -1,0 +1,44 @@
+{template "header.html"}
+<link rel="stylesheet" type="text/css" href="{HOME_THEME_PATH}css/list.css" />
+<div class="Dg">您当前位置：<a href="{SITE_URL}">首页</a>  > <a href="{MODULE_URL}">{MODULE_NAME}</a>  > {dr_catpos($catid, ' > ')}</div>
+<div class="main clear">
+    <div class="box cat-data">
+		{template "list_form.html"}
+	</div>
+    <div class="col-left"> 
+    	<div class="category-main box generic info-content">
+        	<div class="title">
+                <strong>搜索结果</strong>
+            </div>
+            {if $contentid}
+            <!--固定格式INin参数调用搜索数据，field同样可以设置显示字段，page=1表示分页显示开关，pagesize表示分页数量，ruleurl分页url规则-->
+            {list action=module INid=$contentid order=$get.order page=1 pagesize=10 urlrule=$urlrule}
+            {template "list_data.html"}<!--把列表内容专门放在一个模板页面中，主要是适用于多次调用，因为列表和搜索页都要用到它，所以你懂得-->
+            {/list}
+            {else}
+            <div class="norecord">对不起，没有找到任何记录！</div>
+            {/if}
+			<div id="pages" class="text-c">{$pages}</div>
+		</div>
+    </div>
+    <div class="col-auto">
+    	 <div class="box">
+            <h5 class="title-2">最新视频</h5>
+            <ul class="content digg">
+            	{list action=module catid=$catid field=title,url order=updatetime num=10}	
+				<li><a href="{$t.url}">{$t.title}</a></li>
+                {/list}
+           	</ul>
+        </div>
+        <div class="bk10"></div>
+        <div class="box">
+            <h5 class="title-2">热门视频</h5>
+            <ul class="content digg">
+            	{list action=module catid=$catid field=title,url order=hits num=10}	
+				<li><a href="{$t.url}">{$t.title}</a></li>
+                {/list}
+            </ul>
+        </div>
+    </div>
+</div>
+{template "footer.html","/"}

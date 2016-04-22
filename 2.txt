@@ -1,0 +1,10 @@
+Array
+(
+    [id] => 1
+    [type] => 1
+    [value] => a:3:{s:6:\"tomail\";s:13:\"root@zan3.com\";s:7:\"subject\";s:42:\"【在线下单】通知 [来自：佳晔]\";s:7:\"message\";s:18:\"nihaoasdasdasda是\";}
+    [status] => 0
+    [error] => 
+    [updatetime] => 0
+    [inputtime] => 1414407207
+)

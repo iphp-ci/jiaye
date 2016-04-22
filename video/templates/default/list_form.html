@@ -1,0 +1,49 @@
+<dl class="clear" style="border-top:none">
+    <dt><strong>栏目分类：</strong></dt>
+    <dd class="AttrBox">
+    <a {if !$catid}class="curr"{/if} href="{dr_search_url($params, 'catid', NULL)}">不限</a>
+    <!--调用栏目分类，这种用法只能用于模块列表与搜索页面-->
+    {loop $related $t}
+    <a {if $t.id==$catid}class="curr"{/if} href="{dr_search_url($params, 'catid', $t.id)}">{$t.name}</a>
+    {/loop}
+    </dd>
+</dl> 
+<dl class="clear">
+    <dt><strong>地区搜索：</strong></dt>
+    <dd class="AttrBox">
+    <a {if !$get.area}class="curr"{/if} href="{dr_search_url($params, 'area', NULL)}">不限</a>
+    <!--下面方式是调用下拉选择框字段的值-->
+    {php $area = dr_field_options('area', $catid = $catid, APP_DIR);}
+    {loop $area $t}
+    <a {if $t==$get.area}class="curr"{/if} href="{dr_search_url($params, 'area', $t)}">{$t}</a>
+    {/loop}{$error}	
+    </dd>
+</dl>
+<dl class="clear">
+    <dt><strong>发行年代：</strong></dt>
+    <dd class="AttrBox">
+    <!--循环一组数字，这个都懂得，php最基础的数组用法-->
+    <a {if !$get.year}class="curr"{/if} href="{dr_search_url($params, 'year', NULL)}">不限</a>
+    {php for($i=2005;$i<=date('Y');$i++){ }
+    <a {if $i==$get.zujin}class="curr"{/if} href="{dr_search_url($params, 'year', $i)}">{$i}</a>
+    {php } }
+    </dd>
+</dl>
+<dl class="clear">
+    <dt style="margin-top:5px;"><strong>关键字搜索：</strong></dt>
+    <dd class="AttrBox">
+        <input onkeypress="if(event.keyCode==13) {searchByClass();return false;}" type='text' name='keyword' value='{$keyword}' id='dr_search_keyword' class="examtext02" />
+        <input onclick="searchByClass()" type='button' value='搜索' class="exambtn02"/>
+        <script type="text/javascript">
+        function searchByClass(){
+            var url="{dr_search_url($params, 'keyword', 'omooocom')}";
+            var value=$("#dr_search_keyword").val();
+            if (value) {
+                location.href=url.replace('omooocom', value);
+            } else {
+                dr_tips("输入关键字");
+            }
+        }
+        </script>
+    </dd>
+</dl>

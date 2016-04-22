@@ -1,0 +1,98 @@
+{template "header.html"}
+  
+  <body>
+  <!-- top header -->
+    {template "top.html"}
+    <!-- top header end-->
+    <!-- nav -->
+   {template "nav.html"} 
+    <!-- nav end-->
+    <!-- page bannr -->
+    {template "pagebanner.html"}
+    <!-- page bannr end-->
+    <!-- page wrap -->
+    <div class="zzw mauto pagewrapbox">
+    <!-- left -->
+      <div class="fl zpageleft">
+        <h1 class="ztitle">Online store</h1>
+        <ul class="zpageleftUl">
+         
+          <li><a href="javascript:;" class="on" >Online store</a></li> 
+         
+        </ul>
+      </div>
+    <!-- left end-->
+    <!-- right -->
+    <div class="fr zpageright">
+      <div class="zMianBaobox">
+        <span class="fr">Online store</span>
+         Your present position：Online store
+         <i class="zquan">〇</i>
+      </div>
+      <!-- count -->
+      <div class="zpageCountB">
+          <div class="Plorder mauto">
+           <form action="{SITE_URL}index.php?c=form_1_1" method="post" name="myform" id="myform">
+             <table class="PlorderTb">
+               <tr>
+                 <th class="th1" colspan="2">Product Information</th>
+               </tr>
+               <tr>
+                 <td class="td1">Product</td>
+                 <td class="td2"><input name="data[title]" type="text" class="ztext" required="required" /></td>
+               </tr>
+               <tr>
+                 <td class="td1">Quantity</td>
+                 <td class="td2"><input name="data[num]" type="text"  class="ztext" required="required" /></td>
+               </tr>
+               <tr>
+                 <th class="th1" colspan="2">Customer Information</th>
+               </tr>
+               <tr>
+                 <td class="td1">Company</td>
+                 <td class="td2"><input name="data[company]" type="text"  class="ztext" required="required" /></td>
+               </tr>
+               <tr>
+                 <td class="td1">City</td>
+                 <td class="td2"><input name="data[city]" type="text"  class="ztext" required="required" /></td>
+               </tr>
+               <tr>
+                 <td class="td1">Name</td>
+                 <td class="td2"><input name="data[name]" type="text"  class="ztext" required="required" /></td>
+               </tr>
+               <tr>
+                 <td class="td1">Phone</td>
+                 <td class="td2"><input name="data[tel]" type="text"  class="ztext" required="required" /></td>
+               </tr>
+               <tr>
+                 <td class="td1">E-mail</td>
+                 <td class="td2"><input name="data[email]" type="text"  class="ztext" required="required"/></td>
+               </tr>
+               <tr>
+                 <td class="td1">Address</td>
+                 <td class="td2"><input name="data[address]" type="text"  class="ztext" required="required"/></td>
+               </tr>
+                <tr>
+                 <td class="td1">Remark</td>
+                 <td class="td2"><input name="data[remarks]" type="text"  class="ztext" required="required"/></td>
+               </tr>
+              {if $code}
+                <tr>
+                 <td class="td1">Auth Code</td>
+                 <td class="td2"><input type="text" required="required" style="width:110px; margin-right:10px;" value="" name="code" class="input-text" />{dr_code(120, 40)}</td>
+               </tr>
+                {/if}
+               <tr>
+                 <td class="td3" colspan="2"><input name="submit" type="submit" class="orderBtn" value="Submit" /></td>
+               </tr>
+             </table>
+           </form>
+         </div>
+      </div>
+      <!-- count end-->
+    </div>
+    <!-- right end-->
+    </div>
+    <!-- page wrap end-->
+    <!-- footer -->
+   {template "footer.html"}

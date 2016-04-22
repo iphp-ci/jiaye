@@ -1,0 +1,72 @@
+     <div class="zhideshow">
+       <a href="http://wpa.qq.com/msgrd?v=3&amp;uin={dr_block(7)}&amp;site=qq&amp;menu=yes" target="_blank">
+        {list action=navigator type=5}
+        {if $t.id==76}
+         <img src="{dr_thumb($t.thumb)}" alt="{$t.title}" />
+        {/if}
+       {/list}
+       </a>
+     </div>
+     <!-- hide end--> 
+   <!-- QQonline end-->
+   <!-- <script src=""></script> -->
+    <script type="text/javascript">
+$(function(){
+  {if $result_error}
+  $("#dr_{$result_error.name}").focus();
+  dr_tips("{$result_error.msg}", 3); 
+  {/if}
+});
+</script>
+    <div class="zregistbox" id="zregistboxI">
+    <form action="{SITE_URL}member/index.php?c=register" method="post">
+      <input name="back" type="hidden" value="{$back_url}" />
+      <h3 class="ztitle">Register</h3>
+      <div class="registFormD">
+        <ul class="registFormUl">
+          <li><span>Name：</span><input name="data[username]" type="text" maxlength="64" autofocus value="{$data.username}" required="required"/></li>
+          <li><span>Password：</span><input name="data[password]" type="password" value="{$data.password}"  required="required" /></li>
+          <li><span>Password：</span><input name="data[password2]" type="password"  type="password" value="{$data.password2}" required="required"/></li>
+          <li><span>Contact：</span><input name="data[lname]"  type="text" value="{$data.lname}" required="required"/></li>
+          <li><span>Company：</span><input name="data[cname]"  type="text" value="{$data.cname}" required="required"/></li>
+          <li><span>Telephone：</span><input name="data[tel]"  type="text" value="{$data.tel}" required="required"/></li>
+          <li><span>Email：</span><input name="data[email]" type="text" maxlength="64" value="{$data.email}" required="required"/></li>
+         
+          <li><span>Auth Code：</span><input name="code" type="text" maxlength="64" required="required"/><img align="absmiddle" style="cursor:pointer;" onclick="this.src='{dr_member_url('api/captcha', array('width' => 80, 'height' => 30))}&'+Math.random();" src="{dr_member_url('api/captcha', array('width' => 80, 'height' => 30))}" class="tucodeimg" /></li>
+          
+        </ul>
+      </div>
+      <p class="p1"><input type="checkbox" value="1" checked="checked" name="data[tong]" required="required" /><i>Agree to the above content</i></p>
+      <p class="p2">
+        <input type="submit" class="regBtn" value="register" />
+        <input type="reset" value="reset" />
+      </p>
+    </form>
+    </div>
+    <div class="loginbox" id="loginboxI">
+   
+      <h3 class="ztitle">Welcome to login</h3>
+      
+       <form action="{SITE_URL}member/index.php?c=login&m=index" method="post">
+       <div class="loginFormD">
+       <input name="back" type="hidden" value="{$back_url}" />
+         <ul class="loginFormUl">
+          <li><span class="user"></span>|<input type="text" placeholder="name" maxlength="64" autofocus="autofocus"  id="dr_username" name="data[username]" value="{$data.username}" required="required" /></li>
+          <li><span class="zpwd"></span>|<input type="password" placeholder="password" name="data[password]" required="required" /></li>
+         
+           <li><img align="absmiddle" style="cursor:pointer;" onclick="this.src='{dr_member_url('api/captcha', array('width' => 80, 'height' => 30))}&'+Math.random();" src="{dr_member_url('api/captcha', array('width' => 80, 'height' => 30))}" class="tucodeimg"  />
+            <input type="text" placeholder="code" name="Auth code"  value="" class="incodelo" required="required"/>
+           </li>
+           
+        </ul>
+         <p class="p1">
+           <input type="submit" value="Login" name="submit" class="loginBtn" />
+           <a href="javascript:;" id="rsetLogR">Register</a>
+         </p>
+      </div>
+     
+      </form>
+      
+      
+   
+</div>

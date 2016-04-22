@@ -1,0 +1,66 @@
+{template "header.html"}
+<div class="clear"></div>
+<div class="Dg">您当前位置：<a href="{SITE_URL}">首页</a>  > <a href="{MODULE_URL}">{MODULE_NAME}</a></div>
+<div class="main">
+	<!--left_bar-->
+	<div class="col-left">
+        <div class="box mg_b10">
+            <h5>精品软件</h5>
+            <ul class="content news-photo col4 picbig">
+                <!--查询推荐位1（精品软件）的内容，field需要用到的字段（不填表示全部），按displayorder（后台指定排序）排序-->
+                {list action=module flag=1 field=thumb,title,url order=displayorder,updatetime num=8}
+                <li>
+                    <div class="img-wrap"><a href="{$t.url}"><img src="{dr_thumb($t.thumb,85,56)}" style="height: 85px; width: 56px;"></a></div>
+                    <a href="{$t.url}">{dr_strcut($t.title,10,'')}</a>
+                </li>
+                {/list}{$error}
+            </ul>
+        </div>
+        <!--循环输出顶级栏目下面的子栏目及其内容，运用到了双list循环标签因此需要定义返回值return=c（都懂得）-->
+		{list action=category pid=0 return=c}
+        <div style="{if $key_c%2==1}float:right;{/if}" class="box cat-area">
+        	<h5 class="title-1">{$c.name}<a class="more" href="{$c.url}">更多&gt;&gt;</a></h5>
+             <div class="content">
+                <ul class="list lh24 f14">
+                	<!--循环输出当前栏目下面的数据，我们按最新排序-->
+                    {list action=module catid=$c.id field=title,url,updatetime order=updatetime num=12}
+                    <li><span class="rt">[{dr_date($t._updatetime, 'm-d')}]</span>·<a href="{$t.url}" title="{$t.title}">{dr_strcut($t.title, 40)}</a></li>
+                    {/list}{$error}
+                </ul>
+            </div>
+        </div>
+        {if $key_c%2==1}<div class="bk10"></div>{/if}
+        {/list}
+    </div>
+    <!--right_bar-->
+    <div class="col-auto">
+        <div class="box">
+            <h5 class="title-2">下载分类</h5>
+            <ul class="content col3 h28">
+            	{list action=category pid=0}
+            	<li><a href="{$t.url}">{$t.name}</a></li>
+                {/list}
+            </ul>
+        </div>
+        <div class="bk10"></div>
+        <div class="box">
+            <h5 class="title-2">推荐软件</h5>
+            <ul class="content digg">
+            	<!--查询推荐位2（推荐软件）的内容，field需要用到的字段（不填表示全部），按displayorder（后台指定排序）排序-->
+            	{list action=module flag=1 field=title,url order=displayorder,updatetime num=10}	
+				<li><a href="{$t.url}">{$t.title}</a></li>
+                {/list}
+           	</ul>
+        </div>
+        <div class="bk10"></div>
+        <div class="box">
+            <h5 class="title-2">热门下载</h5>
+            <ul class="content digg">
+            	{list action=module field=title,url order=hits num=10}	
+				<li><a href="{$t.url}">{$t.title}</a></li>
+                {/list}
+            </ul>
+        </div>
+    </div>
+</div>
+{template "footer.html","/"}

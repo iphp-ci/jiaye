@@ -1,0 +1,82 @@
+{template "header.html"}
+  
+  <body>
+  <!-- top header -->
+    {template "top.html"}
+    <!-- top header end-->
+    <!-- nav -->
+   {template "nav.html"} 
+    <!-- nav end-->
+    <!-- page bannr -->
+    {template "pagebanner.html"}
+    <!-- page bannr end-->
+    <!-- page wrap -->
+    <div class="zzw mauto pagewrapbox">
+    <!-- left -->
+      <div class="fl zpageleft">
+        <h1 class="ztitle">{MODULE_NAME}</h1>
+        <ul class="zpageleftUl">
+           {list action=category pid=0  return=n1}
+          <li>
+            <a href="{$n1.url}" {if $catid==$n1.id} class="on" {/if}>{$n1.name}</a>
+
+          {if $n1.child}
+              <div class="zpage_child">
+                <ul class="zpage_child_ul">
+                {list action=category pid=$n1.id  return=n2}
+                  <li><a href="{$n2.url}">{$n2.name}</a></li>
+                  
+                  {/list}
+                </ul>
+              </div>
+            {/if}
+          </li> 
+          {/list}
+              
+        </ul>
+      </div>
+    <!-- left end-->
+    <!-- right -->
+    <div class="fr zpageright"> 
+      <div class="zMianBaobox">
+        <span class="fr">{if $title}{$title}{else}{$name}{/if}</span>
+         您现在的位置：{dr_catpos($catid, ' - ')}
+         <i class="zquan">〇</i>
+      </div>
+      <!-- count -->
+      <div class="zpageCountB">
+        <!-- xinpian list  -->
+         <div class="xinpianListBox">
+           <table class="xinpianListTb">
+           <tr>
+             <th class="th1">型号</th>
+             <th class="th2">描述</th>
+             <th class="th3">Datasheet</th>
+             <th class="th4">厂商链接</th>
+            </tr>
+             {list action=module catid=$catid fiele=title,zurl,description,thumb order=updatetime page=1}
+            <tr>
+             <td class="td1">{$t.title}</td>
+             <td class="td2">{$t.description}</td>
+             <td class="td3"><a href="{dr_down_file($t.downpdf)}">下载</a></td>
+             <td class="td4"><a href="{$t.zurl}" target="_blank">链接</a></td>
+             </tr>
+            {/list}
+             
+           </table>
+         </div>
+        <!-- xinpian list  end-->
+
+         <!-- pading -->
+        <div class="zpading" id="zpadingI">
+         {$pages}
+        </div>
+        <!-- pading end-->
+      </div>
+      <!-- count end-->
+    </div>
+    <!-- right end-->
+    </div>
+    <!-- page wrap end-->
+    <!-- footer -->
+   {template "footer.html"}

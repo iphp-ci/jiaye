@@ -1,0 +1,159 @@
+{template "header.html"}
+  
+  <body class="">
+  <!-- top header -->
+    {template "top.html"}
+    <!-- top header end-->
+    <!-- nav -->
+   {template "nav.html"}
+    <!-- nav end-->
+    <!-- bannr -->
+    {template "banner.html"}
+    <!-- bannr end-->
+    <!-- news in -->
+    <div class="zzw mauto znewsInbox">
+      <div class="fl ztitle"><a href="{$ci->get_cache('module-1-news', 'category', 1, 'url')}">News：</a></div>
+      <div class="fl index-newlistd">
+        <ul class="index-newlistUl" id="indexNlist">
+        {list action=module module=news order=displayorder,updatetime num=10}
+          <li><a href="{$t.url}" title="{$t.title}"><span class="fr">{dr_date($t._updatetime, 'Y-m-d')}</span>{dr_strcut($t.title, 60)}</a></li>
+          {/list}
+        </ul>
+      </div>
+      <div class="fr newTelIn">
+        <img src="{HOME_THEME_PATH}images/ico/tel.gif" alt=""  class="telimg" />
+        Telephone：
+        <strong>{dr_block(4)}</strong>
+      </div>
+    </div>
+    <!-- news in end-->
+    <!-- 突出模块 -->
+    <div class="zzw mauto zTuchu">
+      <ul class="zTuchu-ul">
+        <li>
+          <div class="zthumb">
+            {list action=navigator type=4 pid=0}
+            {if $key==0}
+            <img src="{dr_thumb($t.thumb,280,164)}" alt="{$t.title}" />
+            {/if}
+           {/list}
+            
+          </div>
+          <div class="tuChuTitle">
+            <span class="zIco-qiu"></span><i></i>
+            <span class="z-title">Product Center</span>
+          </div>
+          <div class="tuchuListd">
+          {list action=module module=product order=displayorder,updatetime num=2}
+            <a href="{$t.url}" title="{$t.title}">{dr_strcut($t.title, 20)}</a>
+            {/list}
+          </div>
+          {list action=module module=product flag=1 field=url order=displayorder num=1}
+          <a href="{$t.url}" class="indexzMore">Read more</a>
+          {/list}
+        </li>
+        <li>
+          <div class="zthumb">
+           {list action=navigator type=4 pid=0}
+            {if $key==1}
+            <img src="{dr_thumb($t.thumb,280,164)}" alt="{$t.title}" />
+            {/if}
+           {/list}
+          </div>
+          <div class="tuChuTitle">
+            <span class="zIco-yun"></span><i></i>
+            <span class="z-title">Solution</span>
+          </div>
+          <div class="tuchuListd">
+             {list action=module module=solution order=displayorder,updatetime num=2}
+            <a href="{$t.url}" title="{$t.title}">{dr_strcut($t.title, 20)}</a>
+            {/list}
+          </div>
+           {list action=module module=solution flag=1 field=url order=displayorder num=1}
+          <a href="{$t.url}" class="indexzMore">Read more</a>
+          {/list}
+        </li>
+        <li>
+          <div class="zthumb">
+            {list action=navigator type=4 pid=0}
+            {if $key==2}
+            <img src="{dr_thumb($t.thumb,280,164)}" alt="{$t.title}" />
+            {/if}
+           {/list}
+          </div>
+          <div class="tuChuTitle">
+            <span class="zIco-zhangji"></span><i></i>
+            <span class="z-title">Chip selection</span>
+          </div>
+          <div class="tuchuListd">
+              {list action=module module=chip order=displayorder,updatetime num=2}
+            <a href="{$t.url}" title="{$t.title}">{dr_strcut($t.title, 20)}</a>
+            {/list}
+          </div>
+          {list action=navigator type=4 pid=0}
+            {if $key==2}
+          <a href="{$t.url}" class="indexzMore" {if $t.target}target="_blank"{/if}>Read more</a> {/if}
+           {/list}
+        </li>
+        <li>
+          <div class="zthumb">
+            {list action=navigator type=4 pid=0}
+            {if $key==3}
+            <img src="{dr_thumb($t.thumb,280,164)}" alt="{$t.title}" />
+            {/if}
+           {/list}
+          </div>
+          <div class="tuChuTitle">
+            <span class="zIco-chilun"></span><i></i>
+            <span class="z-title">Development tools</span> 
+          </div>
+          <div class="tuchuListd">
+             {list action=module module=development order=displayorder,updatetime num=2}
+            <a href="{$t.url}" title="{$t.title}">{dr_strcut($t.title, 20)}</a>
+            {/list}
+          </div>
+           {list action=module module=development flag=1 field=url order=displayorder num=1}
+          <a href="{$t.url}" class="indexzMore">Read more</a>
+          {/list}
+        </li>
+      </ul>
+    </div>
+    <!-- 突出模块 end-->
+    <!-- footer -->
+{template "footer.html"}
+<!-- <script type="text/javascript" language="javascript">
+  $(document).ready(function(){
+    var tb=$(".seven_container").sevenslider({
+      width:774,
+      height:405,
+      fullwidth:true,animation:0,automation:true,autointerval:4,progress:true,progresstype:"linear",bullet:true,carousel:false,circular:true,responsive:true,swipe:true,keyboard:true,skin:"fullwidth",lightbox:false    });
+
+  });
+</script> -->
+<script type="text/javascript">
+jQuery(".fullSlide").hover(function() {
+    jQuery(this).find(".prev,.next").stop(true, true).fadeTo("show", 0.5)
+},
+function() {
+    jQuery(this).find(".prev,.next").fadeOut()
+});
+jQuery(".fullSlide").slide({
+    titCell: ".hd ul",
+    mainCell: ".bd ul",
+    effect: "fold",
+    autoPlay: true,
+    autoPage: true,
+    trigger: "click",
+    startFun: function(i) {
+        var curLi = jQuery(".fullSlide .bd li").eq(i);
+        if ( !! curLi.attr("_src")) {
+            curLi.css("background-image", curLi.attr("_src")).removeAttr("_src")
+        }
+    }
+});
+</script>
+<script>
+var c,_=Function;
+with(o=document.getElementById("indexNlist")){ innerHTML+=innerHTML; onmouseover=_("c=1"); onmouseout=_("c=0");}
+(F=_("if(#%18||!c)#++,#%=o.scrollHeight>>1;setTimeout(F,#%18?10:1500);".replace(/#/g,"o.scrollTop")))();
+</script>

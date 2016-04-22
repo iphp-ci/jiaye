@@ -1,0 +1,105 @@
+{template "header.html"}
+<script language="javascript">
+// 这是加入收藏夹的ajax请求，我就随意写了一下提示信息，至于美化啊什么交给你们了
+function dr_favorite() {
+	$.get("{MODULE_URL}index.php?c=api&m=favorite&id={$id}", function(data){
+		if (data == 1) {
+			dr_tips("没有登录，不能收藏");
+		} else if (data == 2) {
+			dr_tips("文档不存在，无法收藏");
+		} else if (data == 3) {
+			dr_tips("更新收藏成功", 3, 1);
+		} else if (data == 4) {
+			dr_tips("收藏成功", 3, 1);
+		}
+	});
+}
+</script>
+
+<script type="text/javascript" src="{HOME_THEME_PATH}js/jquery.sgallery.js"></script>
+
+<style type="text/css" >
+.photo_prev a{ cursor:url({HOME_THEME_PATH}images/prev.cur), auto;}
+.photo_next a{ cursor:url({HOME_THEME_PATH}images/next.cur), auto;}
+</style>
+<div class="clear"></div>
+<div class="Dg">您当前位置：<a href="{SITE_URL}">首页</a>  > <a href="{MODULE_URL}">{MODULE_NAME}</a>  > {dr_catpos($catid, ' > ')} > {$title}<!--面包屑导航--></div>
+<div class="main photo-channel" style="margin-top:0">
+    <div id="Article">
+    	<h1>{$title}<br><span>{$updatetime}&nbsp;&nbsp;&nbsp;作者：{$author}&nbsp;&nbsp;&nbsp;人气：{dr_show_hits($id)}</span></h1>
+		<div class="tool">
+			<a name="pic"></a>
+        	<a class="up" href="javascript:;" title="上一张" onclick="showpic('pre')"><span>上一张</span></a>
+            <a class="next" href="javascript:;" onclick="showpic('next')" title="下一张"><span>下一张</span></a>
+            <span class="stat" id="picnum">(1/{count($images)}</span>
+       		<div class="Article-Tool"><span id="favorite"><a href="javascript:;" onclick="dr_favorite();" class="t6">收藏</a></span></div>
+		</div>
+    	<div class="big-pic" style="height:650px;">
+			<div id="big-pic"><img src="{dr_get_file($images[0]['file'])}" onload="loadpic(1)" style="display: inline; width: 575px; height: 390px;"></div>
+    		<div class="photo_prev"><a id="photoPrev" title="<上一页" class="btn_pphoto" target="_self" hidefocus="true" href="javascript:;" onclick="showpic('pre');"></a></div>
+        	<div class="photo_next"><a id="photoNext" title="下一页>" class="btn_nphoto" target="_self" hidefocus="true" href="javascript:;" onclick="showpic('next')"></a></div>
+        	<a href="javascript:;" class="max" onclick="showpic('big');">查看原图</a>
+        
+        	<div id="endSelect" style="display: none;">
+				<div id="endSelClose" onclick="$('#endSelect').hide();"></div>
+				<div class="bg"></div>
+				<div class="E_Cont">
+				<p>您已经浏览完所有图片</p>
+				<p><a id="rePlayBut" href="javascript:void(0)" onclick="showpic('next', 1);"></a><a id="nextPicsBut" href="javascript:alert('最后一页');"></a></p>	
+				</div>
+			</div>
+    	</div>
+
+    	<div class="list-pic">
+        <div class="pre picbig">
+        	{if $prev_page}
+        	<div class="img-wrap" style="margin-bottom:5px;"><a href="{$prev_page.url}"><img src="{dr_thumb($prev_page.thumb,100,68)}" style="width: 100px; height: 68px;"></a></div>
+            <a href="{$prev_page.url">&lt;上一组</a>
+            {else}
+            <div class="img-wrap" style="margin-bottom:5px;"><a href="javascript:alert('没有了');" title="没有了"><img src="{HOME_THEME_PATH}images/nopic_small.gif" style="display: inline; height: 72px; width: 85.71428571428571px;"></a></div><a href="javascript:alert('没有了');">没有了&gt;</a>
+            {/if}
+        </div>
+        <a href="javascript:;" onclick="showpic('pre')" class="pre-bnt"><span></span></a>
+		<div class="cont" style="position:relative">
+			<ul class="cont picbig" id="pictureurls" style="position: absolute; left: 0px; width: 615px;">
+            	{loop $images $i $t}
+                <li {if $i==0}class="on"{/if}><div class="img-wrap"><a href="javascript:;" hidefocus="true"><img src="{dr_thumb($t.file,100,68)}" alt="{$t.title}" rel="{dr_get_file($t.file)}" style="width: 100px; height: 68px;"></a></div></li>
+                {/loop}
+            </ul>
+		</div>
+        <a href="javascript:;" onclick="showpic('next')" class="next-bnt"><span></span></a>
+        <div class="next picbig">
+        	{if $next_page}
+        	<div class="img-wrap" style="margin-bottom:5px;"><a href="{$next_page.url}"><img src="{dr_thumb($next_page.thumb,100,68)}" style="width: 100px; height: 68px;"></a></div>
+            <a href="{$next_page.url">&lt;下一组</a>
+            {else}
+            <div class="img-wrap" style="margin-bottom:5px;"><a href="javascript:alert('没有了');" title="没有了"><img src="{HOME_THEME_PATH}images/nopic_small.gif" style="display: inline; height: 72px; width: 85.71428571428571px;"></a></div><a href="javascript:alert('没有了');">没有了&gt;</a>
+            {/if}
+        </div>
+    </div>
+    <div class="text">关键词：
+    <!--输出Tag标签，这个用法只能在当前show页面使用-->
+            {loop $keywords $name $url}
+            <a href="{$url}" target="_blank">{$name}</a>
+            {/loop}
+     </div>
+	<div class="content">{$content}</div>
+  </div>
+  <div class="bk10"></div>
+	<div class="relevance">
+	<h5>相关图集</h5>
+      <ul class="photo-list">
+          {list action=related field=title,url,thumb tag=$tag num=5}
+          <li>
+			<div class="img-wrap">
+			<a href="{$t.url}"><img src="{dr_thumb($t.thumb, 150, 112)}" width="150" height="112" ></a>
+			</div>
+			<span style="color:">{dr_strcut($t.title,20)}</span>
+		  </li>
+          {/list}{$error}
+	</ul>
+	</div>
+  <div class="bk10"></div>
+  </div>
+  <script type="text/javascript" src="{HOME_THEME_PATH}js/show_picture.js"></script>
+{template "footer.html","/"}

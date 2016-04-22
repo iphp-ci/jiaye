@@ -1,0 +1,34 @@
+ <div class="wman100 zzwmin znav-box" id="znavbox">
+        <div class="zzw mauto znav" id="znav">
+          <ul class="znav-ul-top">
+            <li class="znav-li-top"><a href="{SITE_URL}">Home</a></li>
+            {list action=navigator type=0 pid=0 return=n1}
+
+            <li class="znav-li-top"><a href="{$n1.url}" {if $n1.target}target="_blank"{/if}>{$n1.name}</a>
+                {if $n1.child}
+                <div class="mauto navBcount">
+                  <div class="navBcountnav">
+                  {list action=navigator type=0 pid=$n1.id return=n2}
+                   <dl class="navBnavDl">
+                   
+                    <dt><a href="{$n2.url}" {if $n1.target}target="_blank"{/if} title="{$n2.title}">{$n2.name}</a></dt>
+                   {if $n2.child}
+                   {list action=navigator type=0 pid=$n2.id return=n3}
+                    <dd><a href="{$n3.url}" title="{$n3.title}" {if $n1.target}target="_blank"{/if}>{$n3.name}</a></dd>
+                    {/list}
+                    {/if}
+                    </dl>
+                    
+                    {/list}
+                    
+                  </div>
+                </div>
+                {/if}
+            </li>
+            {/list}
+           
+     
+          
+          </ul>
+        </div>
+    </div>

@@ -1,0 +1,84 @@
+{template "header.html"}
+  
+  <body>
+  <!-- top header -->
+    {template "top.html"}
+    <!-- top header end-->
+    <!-- nav -->
+   {template "nav.html"} 
+    <!-- nav end-->
+    <!-- page bannr -->
+    <div class="wman100 zzwmin pageban" style="background-image: url({HOME_THEME_PATH}images/pagebaner.jpg)">
+      
+    </div>
+    <!-- page bannr end-->
+    <!-- page wrap -->
+    <div class="zzw mauto pagewrapbox">
+    <!-- left -->
+      <div class="fl zpageleft">
+        <h1 class="ztitle">{MODULE_NAME}</h1>
+        <ul class="zpageleftUl">
+          {list action=category pid=0  return=n1}
+          <li>
+            <a href="{$n1.url}" {if $catid==$n1.id} class="on" {/if}>{$n1.name}</a>
+
+          {if $n1.child}
+              <div class="zpage_child">
+                <ul class="zpage_child_ul">
+                {list action=category pid=$n1.id  return=n2}
+                  <li><a href="{$n2.url}">{$n2.name}</a></li>
+                  
+                  {/list}
+                </ul>
+              </div>
+            {/if}
+          </li> 
+          {/list}
+        </ul>
+      </div>
+    <!-- left end-->
+    <!-- right -->
+    <div class="fr zpageright"> 
+      <div class="zMianBaobox">
+        <span class="fr">{if $title}{$title}{else}{$name}{/if}</span>
+         您现在的位置：{dr_catpos($catid, ' - ')}
+         <i class="zquan">〇</i>
+      </div>
+      <!-- count -->
+      <div class="zpageCountB">
+         <div class="newsListbox">
+          <ul class="newsListUl">
+            {list action=module catid=$catid fiele=title,url,description,thumb order=updatetime page=1}
+            <li>
+              <div class="zthumb">
+                <a href="{$t.url}">
+                {if $thumb}
+                  <img src="{dr_thumb($t.thumb,190,75)}" alt="" />
+                {else}
+                   <img src="{HOME_THEME_PATH}images/news/thumb.jpg" alt="" />
+                {/if}
+                </a>
+              </div>
+              <h3 class="ztitle"><a href="{$t.url}">{$t.title}</a></h3>
+              <p class="p1">
+               <a href="{$t.url}"> {dr_strcut($t.description,80)}</a>
+              </p>
+              <span class="ztime">{dr_date($t._updatetime,'Y-m-d')}</span>
+            </li>
+            {/list}
+          </ul>
+        </div>
+
+         <!-- pading -->
+        <div class="zpading" id="zpadingI">
+         {$pages}
+        </div>
+        <!-- pading end-->
+      </div>
+      <!-- count end-->
+    </div>
+    <!-- right end-->
+    </div>
+    <!-- page wrap end-->
+    <!-- footer -->
+   {template "footer.html"}

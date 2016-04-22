@@ -1,0 +1,93 @@
+body{
+	font-family:Microsoft YaHei,SimSun,Arial;
+}
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+.clear{
+	clear: both;
+}
+.w1000{
+	width:1000px;
+}
+.wman100{
+	width: 100%;
+}
+.w1236{
+	width:1236px;
+}
+.mauto{
+	margin: 0 auto;
+}
+.mxauto{
+	margin-left: auto;
+	margin-right: auto;
+}
+/*input*/
+ input:focus,textarea:focus{ /*当表单组中组件获得焦点的时候，执行动画*/
+    outline:none;
+    -webkit-animation: glow 800ms ease-out infinite alternate;
+    -moz-animation: glow 800ms ease-out infinite alternate;
+    -o-animation: glow 800ms ease-out infinite alternate;
+    -ms-animation: glow 800ms ease-out infinite alternate;
+    animation: glow 800ms ease-out infinite alternate;
+}
+/* 定义动画帧 开始 */
+@-webkit-keyframes glow {
+    0% {
+        border-color: #cccccc;
+        box-shadow: 0 0 5px rgba(9,106,100,.2), inset 0 0 5px rgba(9,106,100,.1);
+    }    
+    100% {
+        border-color: #12215D;
+        box-shadow: 0 0 20px rgba(9,106,100,.6), inset 0 0 10px rgba(9,106,100,.4);
+    }
+}
+
+@-moz-keyframes glow {
+    0% {
+        border-color: #cccccc;
+        box-shadow: 0 0 5px rgba(9,106,100,.2), inset 0 0 5px rgba(9,106,100,.1);
+    }    
+    100% {
+        border-color: #12215D;
+        box-shadow: 0 0 20px rgba(9,106,100,.6), inset 0 0 10px rgba(9,106,100,.4);
+    }
+}
+
+@-o-keyframes glow {
+    0% {
+        border-color: #cccccc;
+        box-shadow: 0 0 5px rgba(9,106,100,.2), inset 0 0 5px rgba(9,106,100,.1);
+    }    
+    100% {
+        border-color: #12215D;
+        box-shadow: 0 0 20px rgba(9,106,100,.6), inset 0 0 10px rgba(9,106,100,.4);
+    }
+}
+
+@-ms-keyframes glow {
+    0% {
+        border-color: #cccccc;
+        box-shadow: 0 0 5px rgba(9,106,100,.2), inset 0 0 5px rgba(9,106,100,.1);
+    }    
+    100% {
+        border-color: #12215D;
+        box-shadow: 0 0 20px rgba(9,106,100,.6), inset 0 0 10px rgba(9,106,100,.4);
+    }
+}
+
+@keyframes glow {
+    0% {
+        border-color: #cccccc;
+        box-shadow: 0 0 5px rgba(9,106,100,.2), inset 0 0 5px rgba(9,106,100,.1);
+    }    
+    100% {
+        border-color: #12215D;
+        box-shadow: 0 0 20px rgba(9,106,100,.6), inset 0 0 10px rgba(9,106,100,.4);
+    }
+}
+/* 定义动画帧 结束 */

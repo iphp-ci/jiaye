@@ -1,0 +1,1 @@
+a:2:{s:42:"http://zan.jiaye.in/index.php?c=page&id=12";s:74:"F:\wwwroot\WWW\jiaye\cache/page/1-12-80ab3da976338c21db45de5fd89a010f.html";s:42:"http://zan.jiaye.in/index.php?c=page&id=13";s:74:"F:\wwwroot\WWW\jiaye\cache/page/1-13-c7358de12c0d328fb35a64616dc8d1c6.html";}

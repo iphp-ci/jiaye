@@ -1,0 +1,221 @@
+{template "header.html"}
+<body>
+    <!-- header -->
+    <div class="zzw mauto zbox">
+    {template "top.html"}
+    <!-- header end-->  
+    <!-- banner -->
+    {template "banner.html"}
+    <!-- banner end-->
+    <!-- count midden  -->
+    <div class="zzw2 mauto zcountbox">
+      <!-- left -->
+      <div class="fl zsidelf">
+        <!-- 1 -->
+        <div class="zsidediv">
+          <h2 class="ztitle"><i class="hongxian"></i><span>{CATEGORY.$catid.name}</span></h2>
+          <div class="zsidecount">
+            <ul class="zsidecountul">
+
+
+          {list action=category pid=$cat.pid return=c}
+          {if $key==0}
+           <li {if $c.id==$catid} class="on za1" {/if}><i></i><a href="{$c.url}">{$c.name}</a></li>
+          {else}
+           <li><i></i><a href="{$c.url}">{$c.name}</a></li>
+           {/if}
+          {/list}
+
+           
+            </ul>
+          </div>
+        </div>
+        <!-- 1 end-->
+        <!-- 2 -->
+        <div class="zsidediv">
+          <h2 class="ztitle"><i class="hongxian"></i><span>招聘搜索
+          </span></h2>
+          <div class="zsidecount">
+            <form method="get" target="_blank" action="{SITE_URL}index.php" class="newform">
+                <select name="" id="" class="newselect">
+                   {list action=category pid=$cat.pid return=c}
+                    <option value="{$c.name}">{$c.name}</option>
+                    {/list}
+                </select>
+                <input name="module" type="hidden" value="{APP_DIR}">
+                <input type="text" class="searchtext" name="keyword" maxlength="50"/><br/>
+                <input type="submit" class="seabtn"/>
+            </form>
+          
+          </div>
+        </div>
+        <!-- 2 end-->
+        <!-- imgin -->
+       <!--  <div class="indexleftimg">
+          <img src="./images/1268457867.gif" alt="" />
+        </div> -->
+        <!-- imgin end-->
+      </div>
+      <!-- left end-->
+      <!-- right -->
+      <div class="fl zcountrt">
+        <!-- page -->
+        <div class="pagemian">
+            <h2><i class="hongxian"></i>
+            您现在的位置：<a href="{SITE_URL}">{SITE_NAME}</a> &gt; {dr_catpos($catid,'&gt;')}</h2>
+            <div class="d1"></div>
+            <div class="d1"></div>
+            <div class="d1"></div>
+        </div>
+       <div class="jobshow">
+         <div class="jobshowinfo">
+             <p class="p1">职位名称：{$title}</p>
+             <p class="p1">职位类型：{$jobtype}</p>
+             <p class="p1">工作经验：{$workexper}</p>
+             <p class="p1">学历要求：{$academic}</p>
+             <p class="p1">招聘人数：{$jobnum}</p>
+             <p class="p1">发布时间：{$updatetime}</p>
+         </div>
+         <!-- Job description -->
+         <div class="job_description_box">
+             <h3 class="job_ztitle_sl">职位描述 <span></span></h3>
+             <div class="job_description">
+                
+                    {$content}
+              <div id="fenye">
+                   
+                    {loop $content_page $i $t}
+                    {if $page==$i}
+                      <span>{$i}</span>
+                    {else}
+                      <a href="{dr_content_page_url($urlrule, $i)}" title="{$t.title}">{$i}</a>
+                    {/if}
+                    {/loop}
+              </div>
+                 
+             </div>
+         </div>
+         <!-- Job description end-->
+         <!-- Position requirements -->
+        <div class="job_description_box">
+             <h3 class="job_ztitle_sl">招聘要求 <span></span></h3>
+             <div class="job_description">
+                 <p>{$requirements}</p>
+             </div>
+         </div>
+         <!-- Position requirements end-->
+         <!-- Contact hr -->
+         <div class="contacthr">
+             <p class="p1">联 系 人：{$person}</p>
+             <p class="p1">联系电话：{$jobtel}</p>
+             <p class="p1">电子邮件：{$jobemail}</p>
+         </div>
+         <!-- Contact hr end-->
+         <!-- Application -->
+         <div class="z_application">
+             <h3 class="ztitle">应聘申请</h3>
+             <form action="">
+                 <table class="jobfomr_tb">
+                     <tr>
+                         <td>姓　　名:</td>
+                         <td><input type="text" class="jobtext" /></td>
+                     </tr>
+                     <tr>
+                         <td>性　　别:</td>
+                         <td>
+                            <select name="" id="">
+                             <option value="男">男</option>
+                             <option value="女">女</option>
+                            </select>
+                        </td>
+                     </tr>
+                     <tr>
+                         <td>出生日期:</td>
+                         <td><input type="text" class="jobtext" /></td>
+                     </tr>
+                     <tr>
+                         <td>婚姻状况:</td>
+                         <td>
+                            <select name="" id="">
+                             <option value="未婚">未婚</option>
+                             <option value="已婚">已婚</option>
+                            </select>
+                        </td>
+                     </tr>
+                     <tr>
+                         <td>毕业院校:</td>
+                         <td><input type="text" class="jobtext" /></td>
+                     </tr>
+                     <tr>
+                         <td>最高学历:</td>
+                         <td><input type="text" class="jobtext" /></td>
+                     </tr>
+                      <tr>
+                         <td>毕业专业:</td>
+                         <td><input type="text" class="jobtext" /></td>
+                     </tr>
+                      <tr>
+                         <td>毕业时间:</td>
+                         <td><input type="text" class="jobtext" /></td>
+                     </tr>
+                      <tr>
+                         <td>联系电话:</td>
+                         <td><input type="text" class="jobtext" /></td>
+                     </tr>
+                      <tr>
+                         <td>手机号码:</td>
+                         <td><input type="text" class="jobtext" /></td>
+                     </tr>
+                     <tr>
+                         <td>通信地址:</td>
+                         <td><input type="text" class="jobtext" /></td>
+                     </tr>
+                     <tr>
+                         <td>电子邮箱:</td>
+                         <td><input type="text" class="jobtext" /></td>
+                     </tr>
+                     <tr>
+                         <td>专业特长:</td>
+                         <td><input type="text" class="jobtext" /></td>
+                     </tr>
+                     <tr>
+                         <td class="jobareatd">教育经历:</td>
+                         <td>
+                             <textarea name="" id="" class="jobarea"></textarea>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td class="jobareatd">工作经历:</td>
+                         <td>
+                             <textarea name="" id="" class="jobarea"></textarea>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td>验 证 码:</td>
+                         <td>
+                             <input type="text" class="jobcode" /><img onclick="this.src='http://www.rh165pt.com/member/index.php?c=api&amp;m=captcha&amp;width=60&amp;height=25&amp;'+Math.random();" src="http://www.rh165pt.com/member/index.php?c=api&amp;m=captcha&amp;width=60&amp;height=25" class="tucodeimg">
+                             <a href="javascript:;">看不清？更换一张</a>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td>&nbsp;</td>
+                         <td>
+                            <input type="submit" class="jobbtn" value="提交"/>
+                         </td>
+                     </tr>
+                 </table>
+             </form>
+         </div>
+         <!-- Application end-->
+       </div>
+        <!-- page end-->
+        <!-- pading -->
+       
+        <!-- pading end-->
+      </div>
+      <!-- right end-->
+    </div>
+    <!-- count midden  end-->
+ 
+    <!-- footer -->
+{template "footer.html"}
