@@ -1,0 +1,12 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "omooo/statics/en/house/boot/Font-Awesome-3.2.1/package.json",
+        "omooo/statics/enjiaye/house/boot/Font-Awesome-3.2.1/package.json",
+        "omooo/statics/jiaye/house/boot/Font-Awesome-3.2.1/package.json",
+        "omooo/statics/simi/house/boot/Font-Awesome-3.2.1/package.json"
+      ]
+    }
+  }
+}
